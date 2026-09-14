@@ -14,8 +14,8 @@ const json = o => new Response(JSON.stringify(o), { headers: { 'Content-Type': '
 
 export default {
   async fetch(request, env, ctx) {
-    setEnv(env); SITE._env = env;
     const url = new URL(request.url);
+    setEnv(env, url.hostname); SITE._env = env;
     let path = url.pathname;
     const host = url.hostname;
     const onDomain = host === SITE.domain || host === 'www.' + SITE.domain;

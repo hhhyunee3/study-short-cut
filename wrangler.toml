@@ -2,21 +2,22 @@ name = "study-short-cut"
 main = "worker.js"
 compatibility_date = "2026-07-23"
 
-# schools.txt 를 문자열로 import 한다 (import SCHOOLS_RAW from './schools.txt')
-[[rules]]
-type = "Text"
-globs = ["**/*.txt"]
-
-# public/ 안의 파일은 사이트 루트 기준으로 그대로 서빙된다 (public/og.png → /og.png).
-# 자산에 없는 주소는 워커가 처리한다. 캐시 규칙은 public/_headers.
-[assets]
-directory = "./public/"
-
 # 커스텀 도메인 — 도메인이 같은 Cloudflare 계정에 있으면 배포 때 자동으로 연결된다.
 routes = [
   { pattern = "study-short-cut.com", custom_domain = true },
   { pattern = "www.study-short-cut.com", custom_domain = true },
 ]
+
+# schools.txt 를 문자열로 import 한다 (import SCHOOLS_RAW from './schools.txt')
+[[rules]]
+type = "Text"
+globs = ["**/*.txt"]
+fallthrough = false
+
+# public/ 안의 파일은 사이트 루트 기준으로 그대로 서빙된다 (public/og.png → /og.png).
+# 자산에 없는 주소는 워커가 처리한다. 캐시 규칙은 public/_headers.
+[assets]
+directory = "./public/"
 
 # 매일 한국시간 12:00 에 사이트맵 주소 일부를 IndexNow 로 제출 (worker.js 의 scheduled)
 [triggers]
