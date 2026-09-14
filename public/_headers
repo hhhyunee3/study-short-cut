@@ -1,0 +1,10 @@
+# 정적 자산 캐시 규칙 (wrangler 4 이상에서 해석)
+# 이미지·OG·아이콘은 파일명이 고정이라 30일 캐시. 교체 시 파일명을 바꾸면 즉시 반영된다.
+/images/*
+  Cache-Control: public, max-age=2592000
+/og.png
+  Cache-Control: public, max-age=2592000
+/favicon.png
+  Cache-Control: public, max-age=2592000
+/apple-touch-icon.png
+  Cache-Control: public, max-age=2592000
