@@ -17,7 +17,8 @@ export default {
     const url = new URL(request.url);
     setEnv(env, url.hostname); SITE._env = env;
     let path = url.pathname;
-    const host = url.hostname;
+    // wrangler dev 는 routes 의 도메인으로 url 을 바꿔 주므로 실제 접속 호스트는 Host 헤더로 본다
+    const host = (request.headers.get('host') || url.hostname).split(':')[0];
     const onDomain = host === SITE.domain || host === 'www.' + SITE.domain;
 
     // http→https, www→apex (실제 도메인에서만)
