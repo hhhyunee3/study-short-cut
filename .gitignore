@@ -1,0 +1,6 @@
+# wrangler 로컬 개발 캐시
+.wrangler/
+node_modules/
+.DS_Store
+# 로컬 환경변수 (커밋 금지)
+.dev.vars
