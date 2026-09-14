@@ -22,7 +22,9 @@ export default {
     const onDomain = host === SITE.domain || host === 'www.' + SITE.domain;
 
     // http→https, www→apex (실제 도메인에서만)
-    if (onDomain && (url.protocol === 'http:' || host.startsWith('www.'))) return redirect(ABS(path) + url.search, 301);
+    // http 여부는 Cloudflare 가 넣는 cf-visitor 로 본다 (wrangler dev 는 url 을 http://도메인 으로 바꿔 주기 때문)
+    let visitorHttp = false; try { visitorHttp = JSON.parse(request.headers.get('cf-visitor') || '{}').scheme === 'http'; } catch (e) {}
+    if (onDomain && (visitorHttp || host.startsWith('www.'))) return redirect(ABS(path) + url.search, 301);
 
     // 여러 슬래시 정리
     if (/\/{2,}/.test(path)) return redirect((onDomain ? SITE.origin : url.origin) + path.replace(/\/{2,}/g, '/') + url.search, 301);
