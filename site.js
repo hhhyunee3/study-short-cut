@@ -1,5 +1,5 @@
 // 사이트 설정 — 브랜드·도메인·색상처럼 이 사이트에서만 다른 값.
-// 문구(홈·과목·지역·학교 본문)는 content.js, 정보글은 guides.js 에 있다.
+// 문구(홈·과목·지역·학교 본문)는 content.js, 교육정보 글은 guides.js 에 있다.
 export default {
   name: '공부지름길',
   nameEn: 'StudyShortcut',
