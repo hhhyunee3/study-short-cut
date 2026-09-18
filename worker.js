@@ -46,7 +46,7 @@ export default {
     if (path === '/rss.xml' || path === '/feed.xml') return rssXml();
     if (path === `/${SITE.indexNowKey}.txt`) return new Response(SITE.indexNowKey, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
     if (path === '/sitemap.xml') return sitemapIndex();
-    { const m = path.match(/^\/sitemap-([a-z]+)\.xml$/); if (m) { const r = sitemapFor(m[1]); if (r) return r; } }
+    { const m = path.match(/^\/sitemap-([a-z0-9-]+)\.xml$/); if (m) { const r = sitemapFor(m[1]); if (r) return r; } }
     if (path === '/favicon.ico') return redirect(url.origin + '/favicon.png', 301);
 
     // 끝 슬래시 통일: 파일 확장자 없는 주소는 슬래시로 301
