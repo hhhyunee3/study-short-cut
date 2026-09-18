@@ -35,3 +35,7 @@ destination_address = "hhhyunee3@naver.com"
 #   DAUM_PIN      다음 웹마스터도구 PIN (robots.txt 에 기록)
 #   SHEET_WEBHOOK_URL 구글 시트 Apps Script 웹앱 URL
 #   NOTIFY_TO / NOTIFY_FROM 알림 메일 수신·발신 주소 (없으면 site.js 값)
+
+[[kv_namespaces]]
+binding = "INQUIRY"
+id = "577f9b3a7b6c46d18ae828e15d8d6032"
