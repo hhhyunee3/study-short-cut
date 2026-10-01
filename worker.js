@@ -5,6 +5,7 @@ import { getSido, getSgg, getDong, findSchool, schoolBySlug, searchSchools, find
 import { subjectMainPage, sidoPage, sggPage, dongPage, gradePage, regionsPage } from './lib/pages-subject.js';
 import { schoolsHubPage, schoolsSidoPage, schoolsSggPage, schoolPage, schoolSubjectPage } from './lib/pages-school.js';
 import { homePage, calculatorPage, guidesHubPage, guidePostPage, notFoundPage } from './lib/pages-misc.js';
+import { decidePage, DECIDE_PAGES } from './lib/pages-decide.js';
 import { sitemapIndex, sitemapFor, robotsTxt, rssXml, llmsTxt, indexNowSubmit, autoPingIndexNow, allSitemapPaths } from './lib/seo.js';
 import { handleContact } from './lib/contact.js';
 
@@ -73,6 +74,8 @@ export default {
     else if (seg[0] === 'regions' && seg.length === 1) r = regionsPage();
     else if (seg[0] === 'tools') { if (seg.length === 2 && seg[1] === 'grade-calculator') r = calculatorPage(); else if (seg.length === 1) return redirect(url.origin + '/tools/grade-calculator/', 301); }
     else if (seg[0] === 'guides') { if (seg.length === 1) r = guidesHubPage(); else if (seg.length === 2) r = guidePostPage(seg[1]); }
+    // 결정 단계 페이지 — /pricing/ /teachers/ /compare/ /fit/ (과목·시도 키와 겹치지 않는다)
+    else if (seg.length === 1 && DECIDE_PAGES.some(d => d.slug === seg[0])) r = decidePage(seg[0]);
     else if (seg[0] === 'schools') {
       if (seg.length === 1) r = schoolsHubPage();
       else if (seg.length === 2) r = schoolsSidoPage(seg[1]);
