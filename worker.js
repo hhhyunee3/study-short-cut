@@ -49,6 +49,7 @@ export default {
     if (path === '/sitemap.xml') return sitemapIndex();
     { const m = path.match(/^\/sitemap-([a-z0-9-]+)\.xml$/); if (m) { const r = sitemapFor(m[1]); if (r) return r; } }
     if (path === '/favicon.ico') return redirect(url.origin + '/favicon.png', 301);
+    if (path === '/favicon.svg' && typeof SITE.logo === 'function') return new Response(SITE.logo(64), { headers: { 'Content-Type': 'image/svg+xml; charset=utf-8', 'Cache-Control': 'public, max-age=86400' } });
 
     // 끝 슬래시 통일: 파일 확장자 없는 주소는 슬래시로 301
     if (path !== '/' && !path.endsWith('/') && !/\.[a-z0-9]{2,5}$/i.test(path)) return redirect((onDomain ? SITE.origin : url.origin) + path + '/' + url.search, 301);
