@@ -1,3 +1,4 @@
+import { guardResponse } from './telguard.js'; // 전화번호: 푸터에서 삭제, PC 너비에서 숨김 (2026-10-10)
 // 진입점: 라우터. 페이지 생성은 lib/pages-*.js, 공통 레이아웃은 lib/core.js, 데이터는 lib/data.js.
 import SITE from './site.js';
 import { setEnv, PR, STYLES_CSS, subjInfo, GRADE_INFO, ALL_SUBJ_KEYS, ABS } from './lib/core.js';
@@ -13,7 +14,7 @@ const page = r => r ? PR(r, r.body, r.form || {}) : null;
 const redirect = (to, status = 301) => Response.redirect(to, status);
 const json = o => new Response(JSON.stringify(o), { headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=300' } });
 
-export default {
+const __APP = {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     setEnv(env, url.hostname); SITE._env = env;
@@ -119,3 +120,6 @@ export default {
     ctx.waitUntil(indexNowSubmit(slice));
   },
 };
+
+// 모든 HTML 응답을 telguard 로 한 번 거친다 (fetch 만 감싸고 scheduled 등 나머지는 그대로)
+export default { ...__APP, fetch: (req, env, ctx) => guardResponse(__APP.fetch(req, env, ctx)) };
