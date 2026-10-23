@@ -1,9 +1,12 @@
+# 배포는 deploy.sh로만. 이 워크플로는 사용 안 함
+# (~/projects/deploy.sh 가 CONTENT_DATE 를 넣어 배포한다. 여기서 배포하면 날짜가 site.js 기본값으로 되돌아간다.)
+
 name: Deploy to Cloudflare Workers
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+  # push·workflow_dispatch 트리거를 뺐다. on 이 비면 파일이 깨지므로, 다른 워크플로가 부를 때만 도는
+  # workflow_call 만 남긴다 — 이 저장소에는 부르는 워크플로가 없어 실제로는 돌지 않는다.
+  workflow_call:
 
 permissions:
   contents: read
