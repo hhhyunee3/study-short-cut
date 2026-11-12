@@ -39,3 +39,9 @@ destination_address = "hhhyunee3@naver.com"
 [[kv_namespaces]]
 binding = "INQUIRY"
 id = "577f9b3a7b6c46d18ae828e15d8d6032"
+
+# 방문·전환 수집 (track.js — 원본 ~/projects/jihyun-stats). 워커 시크릿 STATS_SALT 가 있어야 기록한다.
+[[d1_databases]]
+binding = "STATS"
+database_name = "jihyun_stats"
+database_id = "f72b493f-63e9-4a2b-bc1d-546232f4d561"
