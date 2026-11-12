@@ -33,7 +33,7 @@ const __APP = {
 
     if (path === '/api/contact') {
       if (request.method !== 'POST') return new Response('Method Not Allowed', { status: 405 });
-      return handleContact(request, env);
+      return handleContact(request, env, ctx);
     }
     if (path === '/api/sch-suggest') {
       const q = (url.searchParams.get('q') || '').trim();
